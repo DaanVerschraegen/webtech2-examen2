@@ -58,10 +58,7 @@ angular.module('pokemonApp', ['ngRoute'])
 	    				console.log(data);
 	    				var pokemonJson = data.data.docs;
 	    				console.log(pokemonJson);
-	    				//var pokemonObjects = [];
-	    				//pokemonObjects.push(pokemonJson);
 	    				q.resolve(pokemonJson);
-	    				//
 	    			}, function(err) {
 	    				q.reject(err);
 	    			});
