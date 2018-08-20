@@ -16,7 +16,6 @@ angular.module('pokemonApp', ['ngRoute'])
 			console.log(data);
 			var doc = {};
 			var pokemonObjects = data;
-			var pokemon = [];
 			for (var i = 0; i < pokemonObjects.length; i++) {
 				console.log(pokemonObjects[i]);
 				doc.name = pokemonObjects[i].name;
@@ -44,6 +43,24 @@ angular.module('pokemonApp', ['ngRoute'])
 			}
 		}, function(err) { 
 			alert('Pokemon JSON file not found');
+		});
+		
+		$('#searchButton').on('click', function(e) {
+			if ($('#date1').val() != null && $('#date2').val() != null){
+				$scope.pokemonTussenDatums = '';
+				pokemonSrv.getPokemonJson().then(function(data){
+					console.log(data);
+					var pokemonObjects = data;
+					var pokemonObjectsTussenDatums = [];
+					for (var i = 0; i < pokemonObjects.length; i++) {
+						if (pokemonObjects[i].owned > $('#date1').val() && pokemonObjects[i].owned < $('#date2').val()) {
+							console.log(pokemonObjects[i]);
+							pokemonObjectsTussenDatums.push(pokemonObjects[i]);
+							$scope.pokemonTussenDatums = pokemonObjectsTussenDatums;
+						}
+					}
+				});
+			}
 		});
     })
    
